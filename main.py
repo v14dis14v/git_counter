@@ -78,7 +78,7 @@ def get_count_lines(name):
         
         current_lines_added = match.group(4)
 
-        if current_lines_added == None:
+        if current_lines_added == None or current_lines_added == '-':
             continue
 
         current_lines_added = int(current_lines_added)
