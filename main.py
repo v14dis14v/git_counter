@@ -57,7 +57,7 @@ def main():
     if os.path.exists(main_path)  == False:
         print('Error: path does\'t exist')
 
-    app_path = os.getcwd()
+    app_path = os.path.abspath(__file__)[0: -8]
     os.chdir(main_path)
 
     name          = os.popen('git config user.name').read().strip()
