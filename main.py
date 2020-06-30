@@ -3,14 +3,15 @@ import re
 
 project_stats = {}
 
-"""
 
-Подсчёт количества закомиченных строк
-
-:param name Имя пользователя в git
-:param app_path путь до приложения
-"""
 def get_count_lines(name: str, app_path: str) -> list:
+    """
+    Подсчёт количества закомиченных строк
+
+    :param name Имя пользователя в git
+    :param app_path путь до приложения
+    """
+
     project_stats = os.popen(f"bash {app_path}/count.sh").read()
     matches = re.finditer(r'(\w+) (\d+) (\d+)', project_stats, re.MULTILINE)
 
@@ -27,14 +28,15 @@ def get_count_lines(name: str, app_path: str) -> list:
     return [0, 0]
 
 
-"""
-
-Упаковка в словарь 
-
-:param added число добавленных строк
-:param deleted число удалённых строк
-"""
 def add_user_stats(file_path: str, added: int, deleted: int) -> None:
+    """
+    Упаковка в словарь
+
+    :param file_path путь до проекта
+    :param added число добавленных строк
+    :param deleted число удалённых строк
+    """
+
     project_name = re.search(r'(\w+)\/\.git', file_path).group(1)
 
     if project_name in project_stats:
@@ -44,11 +46,11 @@ def add_user_stats(file_path: str, added: int, deleted: int) -> None:
         project_stats[project_name] = {'added': added, 'deleted': deleted}
 
 
-"""
-
-Точка входа 
-"""
 def main() -> None:
+    """
+    Точка входа
+    """
+
     added_lines = 0
     deleted_lines = 0
 
